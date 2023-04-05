@@ -66,6 +66,7 @@ for i in range(1):
         #     f.write("e")
         #     f.close()
         #     continue
+        is_empty = True
         for i in range(detections.size(1)):
             j = 0
             while detections[0, i, j, 0] >= 0.8:
@@ -104,11 +105,16 @@ for i in range(1):
                 if label_name:
                     if not label_name == "balloon":
                         f.write(label_name[0])
+                        is_empty = False
                     else:
                         f.write("e")
                 else:
                     f.write("e")
                 f.close()
+        if is_empty:
+            f = open("../temp.txt", "w")
+            f.write("e")
+            f.close()
         # cv2.imshow("imshow", cv2.cvtColor(rgb_image, cv2.COLOR_BGR2RGB))
         # cv2.waitKey(1)
         save_path = "./result.jpg"

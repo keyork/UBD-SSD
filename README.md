@@ -30,5 +30,5 @@ python run_detector.py
 
 ## Bugs
 
-- [ ] 检测为空的处理
+- [x] 检测为空的处理
 - [ ] torch>=1.3.0 对于 static forward method 的修改，现在会有很多 warning
