@@ -16,6 +16,8 @@ opencv-python
 
 ## Usage
 
+下载好权重文件，放在`./weights_ours/`下（如果没有这个文件夹就自己手动创建一下）
+
 在运行无人机程序(tello-control)之前，到这个目录下运行
 
 ```
