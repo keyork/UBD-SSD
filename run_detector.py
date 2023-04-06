@@ -7,8 +7,6 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 
 import torch
-import torch.nn as nn
-import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 import numpy as np
 import cv2
@@ -45,10 +43,10 @@ for i in range(1):
         x = x[:, :, ::-1].copy()
 
         x = torch.from_numpy(x).permute(2, 0, 1)
+        with torch.no_grad():
+            xx = x.unsqueeze(0)
 
-        xx = Variable(x.unsqueeze(0))
-
-        y = net(xx)
+            y = net(xx)
         end = time.time()
 
         print("fps = " + str(1 / (end - start)))
@@ -60,12 +58,7 @@ for i in range(1):
         detections = y.data
         # scale each detection back up to the image
         scale = torch.Tensor(rgb_image.shape[1::-1]).repeat(2)
-        # print(detections.size(1))
-        # if detections.size(1) == 0:
-        #     f = open("../temp.txt", "w")
-        #     f.write("e")
-        #     f.close()
-        #     continue
+
         is_empty = True
         for i in range(detections.size(1)):
             j = 0
