@@ -1,6 +1,7 @@
 import os
 import time
 import sys
+from cfg import THRESHOLD
 
 module_path = os.path.abspath(os.path.join(".."))
 if module_path not in sys.path:
@@ -15,6 +16,7 @@ if torch.cuda.is_available():
     torch.set_default_tensor_type("torch.cuda.FloatTensor")
 
 from ssd import build_ssd
+
 
 net = build_ssd("test", 300, 5)
 
@@ -62,7 +64,7 @@ for i in range(1):
         is_empty = True
         for i in range(detections.size(1)):
             j = 0
-            while detections[0, i, j, 0] >= 0.8:
+            while detections[0, i, j, 0] >= THRESHOLD:
                 score = detections[0, i, j, 0]
                 label_name = labels[i - 1]
                 display_txt = "%s: %.2f" % (label_name, score)
