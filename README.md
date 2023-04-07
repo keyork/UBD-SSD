@@ -40,7 +40,7 @@ python run_detector.py
 
 ## Result
 
-足球(图源见水印)
+足球
 
 ![football](./img/result-2.jpg)
 
